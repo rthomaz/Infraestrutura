@@ -8,10 +8,15 @@ echo "Fazendo download dos pacotes base ..."
 getpackage(){
 	packagename=$1
 	baseurl="https://raw.githubusercontent.com/rthomaz/Infraestrutura/master/scripts"	
-	wget --no-cache -O $packagename $baseurl/$packagename
-	chmod 700 $packagename
-	sed -i 's/\r//g' $packagename
+	wget --no-cache -O infra/$packagename $baseurl/$packagename
+	chmod 700 infra/$packagename
+	sed -i 's/\r//g' infra/$packagename
 }
+
+if [ ! -d "infra" ]; then
+	echo "Criando diretório de 'infra' ..."	
+	mkdir infra
+fi
 
 # core
 getpackage "common.sh"

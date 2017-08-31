@@ -24,7 +24,7 @@ echo "Verificando se o pacote '$_packageName' já está instalado ..."
 
 if [ $(dpkg-query -W -f='${Status}' $_packageName 2>/dev/null | grep -c "ok installed") -eq 0 ]; then
         echo "Instalando '$_packageName' ..."
-        apt-get -y -qq install $_packageName
+        apt-get -y -qq install infra/$_packageName
         echo "'$_packageName' instalado com sucesso !"
 else
         echo "Aviso: '$_packageName' já está instalado no sistema !"

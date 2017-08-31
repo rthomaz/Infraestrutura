@@ -1,7 +1,5 @@
 #!/bin/sh
 
-echo "ggggg:" $PWD
-
 . infra/./common.sh
 
 echo ""

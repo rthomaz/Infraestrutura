@@ -7,7 +7,8 @@ echo "Fazendo download dos pacotes base ..."
 
 getpackage(){
 	packagename=$1
-	baseurl="https://raw.githubusercontent.com/rthomaz/Infraestrutura/master/scripts"	
+	# baseurl="https://raw.githubusercontent.com/rthomaz/Infraestrutura/master/scripts"	
+	baseurl="http://dev02-pc/linux_scripts"	
 	wget --no-cache -O infra/$packagename $baseurl/$packagename
 	chmod 700 infra/$packagename
 	sed -i 's/\r//g' infra/$packagename

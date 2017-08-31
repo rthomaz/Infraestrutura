@@ -1,6 +1,8 @@
 #!/bin/sh
 
-. ././common.sh
+echo "ggggg:" $PWD
+
+. ./common.sh
 
 echo ""
 echo "Iniciando execução do script $0"

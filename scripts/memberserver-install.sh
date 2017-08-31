@@ -29,6 +29,9 @@ if [ "$_pdc_server_fqdn" = "" ] || [ "$_ip" = "" ]; then
         usage
 fi
 
+# openssh-server
+executescript "openssh-server-install.sh"
+executescript "openssh-server-config.sh -i $_ip"
 
 # clamav
 executescript "clamav-install.sh"

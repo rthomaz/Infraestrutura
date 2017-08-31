@@ -2,7 +2,7 @@
 
 echo "ggggg:" $PWD
 
-. ./common.sh
+. infra/./common.sh
 
 echo ""
 echo "Iniciando execução do script $0"

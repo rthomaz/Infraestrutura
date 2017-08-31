@@ -33,7 +33,10 @@ if [ ! -d "source" ]; then
         mkdir source
 fi
 
-. ./source/common.sh
+
+current_dir="$(dirname "$0")"
+$current_dir/source/./common.sh
+
 
 echo "Fazendo download dos pacotes base ..."
 
@@ -68,9 +71,9 @@ wget --no-cache -O source/ntp-install.sh https://raw.githubusercontent.com/rthom
 executescript "ntp-install.sh"
 chmod 700 source/ntp-install.sh
 
-wget --no-cache -O source/ntpdate-config.sh https://raw.githubusercontent.com/rthomaz/Infraestrutura/master/scripts/ntpdate-config.sh
+wget --no-cache -O source/ntp-config.sh https://raw.githubusercontent.com/rthomaz/Infraestrutura/master/scripts/ntp-config.sh
 executescript "ntp-config.sh -n $_pdc_server_fqdn"
-chmod 700 source/ntpdate-config.sh
+chmod 700 source/ntp-config.sh
 
 echo ""
 echo "Script $0 executado com sucesso !"

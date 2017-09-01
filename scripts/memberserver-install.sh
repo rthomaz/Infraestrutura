@@ -92,4 +92,4 @@ echo ""
 echo "Script $0 executado com sucesso !"
 echo ""
 
-#exit 0;
+exit 0;

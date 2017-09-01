@@ -1,9 +1,5 @@
 #!/bin/sh
 
-echo 
-
-
-
 echo ""
 echo "Iniciando execução do script $0"
 

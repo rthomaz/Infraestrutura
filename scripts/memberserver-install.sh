@@ -2,7 +2,7 @@
 
 echo 
 
-. ./common.sh
+
 
 echo ""
 echo "Iniciando execução do script $0"
@@ -79,7 +79,7 @@ getpackage "memberserver-install.sh"
 
 
 
-
+. ./common.sh
 
 
 # openssh-server

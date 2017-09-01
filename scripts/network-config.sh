@@ -5,9 +5,9 @@
 echo ""
 echo "Iniciando execução do script $0"
 
-usage() { echo "Usage: $0 [-i <static ip address>] [-h <host name>] [-m <netmask address>] [-n <network address>] [-b <broadcast address>] [-g <gateway address>] [-d <domain name>] [-a <dns ip address>]" 1>&2; exit 1; }
+usage() { echo "Usage: $0 [-i <static ip address>] [-h <host name>] [-m <netmask address>] [-n <network address>] [-b <broadcast address>] [-g <gateway address>] [-d <domain name>] [-a <dns ip address>] [-e <network interface>]" 1>&2; exit 1; }
 
-while getopts i:h:m:n:b:g:d:a: option
+while getopts i:h:m:n:b:g:d:a:e: option
 do
         case "${option}"
         in
@@ -19,6 +19,7 @@ do
 		g) _gateway=${OPTARG};;
 		d) _domainname=${OPTARG};;
 		a) _dns=${OPTARG};;
+		e) _networkinterface=${OPTARG};;
         *) usage;;
         esac
 done
@@ -55,15 +56,19 @@ if [ "$_dns" = "" ]; then
         echo "Erro: parâmetro -a (dns ip address) requerido !"
 fi
 
-if [ "$_ip" = "" ] || [ "$_hostname" = "" ] || [ "$_netmask" = "" ] || [ "$_network" = "" ] || [ "$_broadcast" = "" ] || [ "$_gateway" = "" ] || [ "$_domainname" = "" ] || [ "$_dns" = "" ]; then
+if [ "$_networkinterface" = "" ]; then
+        echo "Erro: parâmetro -e (network interface) requerido !"
+fi
+
+if [ "$_ip" = "" ] || [ "$_hostname" = "" ] || [ "$_netmask" = "" ] || [ "$_network" = "" ] || [ "$_broadcast" = "" ] || [ "$_gateway" = "" ] || [ "$_domainname" = "" ] || [ "$_dns" = "" ] || [ "$_networkinterface" = "" ];; then
         usage
 fi
 
 
 ### Antes de alterar a configuração, a interface de rede deve ser parada
 
-ifdown eth0
-
+echo "Pausando a interface $_networkinterface ..."
+ifdown $_networkinterface
 
 ### Configurando interfaces
 
@@ -85,8 +90,8 @@ auto lo
 iface lo inet loopback
 
 # Static IP address
-auto eth0
-iface eth0 inet static
+auto $_networkinterface
+iface $_networkinterface inet static
         address $_ip
         netmask $_netmask
         network $_network
@@ -98,12 +103,6 @@ iface eth0 inet static
 EOF
 
 echo "Ficheiro $_interfacesconfpath criado com sucesso !"
-
-echo "Atualizando os repositórios ..."
-
-apt-get update
-
-echo "Repositórios atualizados com sucesso !"
 
 ### Configurando resolv.conf
 
@@ -125,7 +124,8 @@ echo "Ficheiro $_resolvconfpath criado com sucesso !"
 
 ### Reiniciar a interface de rede para ativar a nova configuração
 
-ifup eth0
+echo "Reiniciando a interface $_networkinterface ..."
+ifup $_networkinterface
 
 ### Configurando hostname
 
@@ -142,6 +142,9 @@ $_hostname
 EOF
 
 echo "Ficheiro $_hostnameconfpath criado com sucesso !"
+
+echo "Aplicando o novo nome de host ..."
+hostname -F /etc/hostname
 
 ### Configurando hosts
 

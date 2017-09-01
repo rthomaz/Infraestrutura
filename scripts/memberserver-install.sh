@@ -31,12 +31,6 @@ if [ "$_pdc_server_fqdn" = "" ] || [ "$_ip" = "" ]; then
         usage
 fi
 
-
-
-
-
-
-
 echo "Fazendo download dos pacotes base ..."
 
 getpackage(){
@@ -47,11 +41,6 @@ getpackage(){
 	chmod 700 infra/$packagename
 	sed -i 's/\r//g' infra/$packagename
 }
-
-if [ ! -d "infra" ]; then
-	echo "Criando diretório de 'infra' ..."	
-	mkdir infra
-fi
 
 # core
 getpackage "common.sh"

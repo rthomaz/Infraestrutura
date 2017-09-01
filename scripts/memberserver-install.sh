@@ -45,6 +45,9 @@ getpackage "common.sh"
 
 getpackage "package-install.sh"
 
+# network
+getpackage "network-config.sh"
+
 # apt-jessie
 getpackage "apt-jessie-config.sh"
 

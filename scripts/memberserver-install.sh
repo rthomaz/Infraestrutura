@@ -1,6 +1,6 @@
 #!/bin/sh
 
-. infra/./common.sh
+. ./common.sh
 
 echo ""
 echo "Iniciando execução do script $0"

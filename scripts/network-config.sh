@@ -7,7 +7,7 @@ echo "Iniciando execução do script $0"
 
 usage() { echo "Usage: $0 [-i <static ip address>] [-h <host name>] [-m <netmask address>] [-n <network address>] [-b <broadcast address>] [-g <gateway address>] [-d <domain name>] [-a <dns ip address>]" 1>&2; exit 1; }
 
-while getopts i:m:n:b:g:d:a: option
+while getopts i:h:m:n:b:g:d:a: option
 do
         case "${option}"
         in

@@ -44,6 +44,9 @@ getpackage(){
 
 # core
 getpackage "common.sh"
+
+. ./common.sh
+
 getpackage "package-install.sh"
 
 # openssh-server
@@ -68,8 +71,6 @@ getpackage "memberserver-install.sh"
 
 
 
-. ./common.sh
-
 
 # openssh-server
 executescript "openssh-server-install.sh"
@@ -91,4 +92,4 @@ echo ""
 echo "Script $0 executado com sucesso !"
 echo ""
 
-exit 0;
+#exit 0;

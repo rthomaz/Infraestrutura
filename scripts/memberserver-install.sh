@@ -38,8 +38,8 @@ getpackage(){
 	# baseurl="https://raw.githubusercontent.com/rthomaz/Infraestrutura/master/scripts"	
 	baseurl="http://dev02-pc/linux_scripts"	
 	wget --no-cache -O $packagename $baseurl/$packagename
-	chmod 700 infra/$packagename
-	sed -i 's/\r//g' infra/$packagename
+	chmod 700 $packagename
+	sed -i 's/\r//g' $packagename
 }
 
 # core
